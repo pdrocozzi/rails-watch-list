@@ -70,3 +70,7 @@ gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form"
 gem "sassc-rails"
+
+gem "open-uri", "~> 0.5.0"
+gem "json", "~> 2.10"
+gem "faker"
