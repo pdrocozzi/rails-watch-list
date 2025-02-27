@@ -1,0 +1,44 @@
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><%= @list.name %></h1>
+    <div>
+      <%= link_to "Back to lists", lists_path, class: "btn btn-outline-secondary me-2" %>
+      <%= link_to "Add a movie", new_list_bookmark_path(@list), class: "btn btn-primary" %>
+    </div>
+  </div>
+
+  <% if @list.bookmarks.empty? %>
+    <div class="alert alert-info">
+      You haven't added any movies to this list yet.
+      <%= link_to "Add your first movie", new_list_bookmark_path(@list) %>!
+    </div>
+  <% else %>
+    <div class="row">
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <% if bookmark.movie.poster_url.present? %>
+              <%= image_tag bookmark.movie.poster_url, class: "card-img-top", alt: bookmark.movie.title %>
+            <% end %>
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-title"><%= bookmark.movie.title %></h5>
+                <span class="badge bg-primary"><%= bookmark.movie.rating %></span>
+              </div>
+              <p class="card-text"><%= bookmark.movie.overview %></p>
+              <p class="card-text">
+                <small class="text-muted"><i class="fas fa-quote-left me-1"></i> <%= bookmark.comment %></small>
+              </p>
+              <%= link_to list_bookmark_path(@list, bookmark),
+                          method: :delete,
+                          data: { confirm: "Are you sure you want to remove this movie from your list?" },
+                          class: "btn btn-sm btn-outline-danger" do %>
+                <i class="fas fa-trash-alt"></i> Delete
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

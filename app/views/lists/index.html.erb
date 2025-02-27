@@ -1,0 +1,28 @@
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>My Movie Lists</h1>
+    <%= link_to "Create a new list", new_list_path, class: "btn btn-primary" %>
+  </div>
+
+  <% if @lists.empty? %>
+    <div class="alert alert-info">
+      You don't have any movie lists yet. <%= link_to "Create your first list", new_list_path %>!
+    </div>
+  <% else %>
+    <div class="row">
+      <% @lists.each do |list| %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title"><%= list.name %></h5>
+              <p class="card-text text-muted">
+                <%= pluralize(list.movies.count, 'movie') %> in this list
+              </p>
+              <%= link_to "View details", list_path(list), class: "btn btn-outline-primary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
