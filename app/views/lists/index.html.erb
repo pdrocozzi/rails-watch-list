@@ -1,28 +1,46 @@
-<div class="container py-5">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>My Movie Lists</h1>
-    <%= link_to "Create a new list", new_list_path, class: "btn btn-primary" %>
-  </div>
+<!-- Navbar -->
+<div class="navbar-movie">
+</div>
 
-  <% if @lists.empty? %>
-    <div class="alert alert-info">
-      You don't have any movie lists yet. <%= link_to "Create your first list", new_list_path %>!
+<div class="hero-banner">
+  <div class="hero-content">
+    <h1>Movie Listinha</h1>
+  </div>
+</div>
+
+<div class="lists-section">
+  <div class="container">
+    <div class="lists-header">
+      <h2>Listinhas</h2>
+      <%= link_to "➕ Listinha", new_list_path, class: "btn btn-create" %>
     </div>
-  <% else %>
-    <div class="row">
+
+    <div class="lists-grid">
       <% @lists.each do |list| %>
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title"><%= list.name %></h5>
-              <p class="card-text text-muted">
-                <%= pluralize(list.movies.count, 'movie') %> in this list
-              </p>
-              <%= link_to "View details", list_path(list), class: "btn btn-outline-primary" %>
-            </div>
+        <%
+
+          case list.name.downcase
+          when "classic", "classic movies"
+            card_class = "list-classic"
+            bg_image = "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba"
+          when "superhero"
+            bg_image = "https://i.imgur.com/P5GgZMJ.jpg"
+          when "drama"
+            bg_image = "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+          when "comedy"
+            bg_image = "https://images.unsplash.com/photo-1543584756-8f40a802e13f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+          else
+            bg_image = "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+          end
+        %>
+
+        <%= link_to list_path(list) do %>
+          <div class="list-card <%= card_class %>">
+            <img src="<%= bg_image %>" alt="<%= list.name %>">
+            <div class="list-title"><%= list.name %></div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
-  <% end %>
+  </div>
 </div>

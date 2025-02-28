@@ -1,1 +1,167 @@
 // Specific CSS for your home-page
+// Cinema theme styling
+
+// Header/Navbar
+.navbar-movie {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+
+  .logo {
+    height: 35px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+
+    a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+
+      &:hover {
+        color: #e30b13;
+      }
+    }
+  }
+}
+
+// Hero banner
+.hero-banner {
+  position: relative;
+  height: 450px;
+  background-color: #604863;
+  background-position: center;
+  color: rgb(219, 113, 154);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+  }
+
+  .category-tag {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 6px 25px;
+    border-radius: 30px;
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
+
+// Lists section
+.lists-section {
+  padding: 50px 30px;
+  background-color: #f5f5f5;
+
+  .lists-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .btn-create {
+      background-color: #00c16e;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: darken(#00c16e, 5%);
+        text-decoration: none;
+        color: white;
+      }
+    }
+  }
+
+  .lists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+  }
+
+  .list-card {
+    position: relative;
+    height: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.7);
+      transition: filter 0.3s;
+    }
+
+    &:hover img {
+      filter: brightness(0.5);
+    }
+
+    .list-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      z-index: 2;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    &.list-classic img {
+      filter: grayscale(1) brightness(0.7);
+    }
+
+    &:hover.list-classic img {
+      filter: grayscale(1) brightness(0.5);
+    }
+  }
+}

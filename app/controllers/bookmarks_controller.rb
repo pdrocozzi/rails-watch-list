@@ -1,5 +1,6 @@
 class BookmarksController < ApplicationController
   before_action :set_list, only: [:new, :create]
+  before_action :set_bookmark, only: [:destroy]
 
   def new
     @bookmark = Bookmark.new
@@ -11,7 +12,7 @@ class BookmarksController < ApplicationController
     @bookmark.list = @list
 
     if @bookmark.save
-      redirect_to list_path(@list), notice: 'Movie successfully added to your list!'
+      redirect_to list_path(@list), notice: 'Movie added!'
     else
       @movies = Movie.all
       render :new, status: :unprocessable_entity
@@ -22,13 +23,17 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.find(params[:id])
     @list = @bookmark.list
     @bookmark.destroy
-    redirect_to list_path(@list), notice: 'Movie was successfully removed from your list.'
+    redirect_to list_path(@list), notice: 'Movie removed.'
   end
 
   private
 
   def set_list
     @list = List.find(params[:list_id])
+  end
+
+  def set_bookmark
+    @bookmark = Bookmark.find(params[:id])
   end
 
   def bookmark_params

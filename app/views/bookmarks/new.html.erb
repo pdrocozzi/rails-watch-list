@@ -1,0 +1,48 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h1 class="h4 mb-0">Add movie at: <%= @list.name %></h1>
+        </div>
+        <div class="card-body">
+          <%= simple_form_for [@list, @bookmark] do |f| %>
+            <% if @bookmark.errors.any? %>
+              <div class="alert alert-danger">
+                <h2><%= pluralize(@bookmark.errors.count, "error") %> this bookmark cannot be saved:</h2>
+                <ul>
+                  <% @bookmark.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="mb-3">
+              <%= f.association :movie,
+                  collection: @movies,
+                  prompt: "Choose a movie",
+                  input_html: { class: "form-select" } %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.input :comment,
+                  as: :text,
+                  placeholder: "Tell about this movie",
+                  input_html: { rows: 3, class: "form-control" },
+                  hint: "Must be at least 6 characters long" %>
+            </div>
+
+            <div class="d-grid gap-2">
+              <%= f.button :submit, "➕ Movie", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+
+          <div class="mt-3 text-center">
+            <%= link_to "Return to list", list_path(@list) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
